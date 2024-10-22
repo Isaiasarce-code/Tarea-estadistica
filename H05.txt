@@ -1,0 +1,22 @@
+import numpy as np
+import pandas as pd
+
+# Crear datos de ejemplo
+data = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+# Definir la ventana de la media móvil
+ventana = 3
+
+# Media Móvil Simple (SMA)
+def simple_moving_average(data, ventana):
+    resultados = {'Ventana': [], 'Media Móvil (SMA)': []}
+    for i in range(len(data) - ventana + 1):
+        parventana = data[i:i + ventana]  # Crear subconjunto de la ventana
+        media_movil = float(np.mean(parventana))  # Calcular la media de la ventana
+        resultados['Ventana'].append(i + 1)  # Índice de la ventana (empezando desde 1)
+        resultados['Media Móvil'].append(media_movil)  # Media móvil de esa ventana
+    return pd.DataFrame(resultados)  # Convertir en DataFrame para una tabla bonita
+
+# Calcular y mostrar la tabla
+tabla_sma = simple_moving_average(data, ventana)
+print(tabla_sma)
